@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+/* Design tokens. "Blueprint": drafting-paper white, midnight ink, ultramarine for action, aqua for growth. */
+@theme {
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-newsreader), ui-serif, Georgia, serif;
+
+  --color-paper: #f4f7fc;
+  --color-card: #ffffff;
+  --color-ink: #0a1128;
+  --color-ink-2: #333f5c;
+  --color-muted: #56627f;
+  --color-line: #dce3f0;
+  --color-line-2: #c2cce0;
+  --color-wash: #e9eef7;
+  --color-tint: #e6ecff;
+  --color-brand: #2744ea;
+  --color-brand-2: #1b30c4;
+  --color-night: #0b1437;
+  --color-accent: #19d3b2;
+  --color-accent-ink: #04796e;
+  --color-ok: #0b7f55;
+  --color-warn: #a65f00;
+  --color-err: #c2362b;
+
+  --radius-xs: 2px;
+  --radius-sm: 3px;
+  --radius-md: 5px;
+  --radius-lg: 8px;
+  --shadow-pop: 0 18px 50px -18px rgb(11 20 55 / 0.4);
+}
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { background: var(--color-paper); color: var(--color-ink); font-family: var(--font-sans); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+@media (max-width: 767px) { body { padding-bottom: calc(4rem + env(safe-area-inset-bottom)); } }
+:focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; }
+::selection { background: var(--color-accent); color: #0a1128; }
+img { max-width: 100%; }
+
+/* Type scale: display, h1-h4, lead, body, small, caption, label */
+.display { font-family: var(--font-display); font-weight: 350; font-size: clamp(2.6rem, 1.2rem + 5.4vw, 5.25rem); line-height: 1.02; letter-spacing: -0.025em; text-wrap: balance; }
+.h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.1rem, 1.2rem + 3.2vw, 3.75rem); line-height: 1.06; letter-spacing: -0.02em; text-wrap: balance; }
+.h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.75rem, 1.2rem + 1.9vw, 2.85rem); line-height: 1.1; letter-spacing: -0.015em; text-wrap: balance; }
+.h3 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.6rem); line-height: 1.2; letter-spacing: -0.005em; }
+.h4 { font-weight: 700; font-size: 1.0625rem; line-height: 1.3; }
+.lead { font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem); line-height: 1.55; color: var(--color-ink-2); }
+.small { font-size: 0.875rem; }
+.caption { font-size: 0.75rem; color: var(--color-muted); }
+.label { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--color-muted); }
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* Survey-sheet fact table: ruled cells, label above value, like a land-record extract */
+.sheet { display: grid; grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr)); border-top: 1px solid var(--color-line-2); border-left: 1px solid var(--color-line-2); }
+.sheet > div { background: var(--color-card); padding: 0.85rem 1rem; border-right: 1px solid var(--color-line-2); border-bottom: 1px solid var(--color-line-2); }
+.sheet dt { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--color-muted); }
+.sheet dd { margin-top: 0.2rem; font-weight: 700; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+
+/* Long-form reading */
+.prose-ppi { font-family: var(--font-display); font-size: 1.1875rem; line-height: 1.72; max-width: 68ch; }
+.prose-ppi.sans { font-family: var(--font-sans); font-size: 1rem; line-height: 1.7; }
+.prose-ppi h2 { font-size: 1.9rem; line-height: 1.15; margin: 2.2em 0 0.6em; letter-spacing: -0.01em; font-weight: 400; }
+.prose-ppi h3 { font-family: var(--font-sans); font-size: 1.1rem; font-weight: 700; margin: 1.8em 0 0.4em; }
+.prose-ppi h4 { font-family: var(--font-sans); font-weight: 700; margin: 1.4em 0 0.3em; }
+.prose-ppi p, .prose-ppi ul, .prose-ppi ol { margin: 0 0 1.1em; }
+.prose-ppi ul { list-style: disc; padding-left: 1.3em; }
+.prose-ppi ol { list-style: decimal; padding-left: 1.3em; }
+.prose-ppi li { margin: 0.25em 0; }
+.prose-ppi a { color: var(--color-brand); text-decoration: underline; text-underline-offset: 3px; }
+.prose-ppi img { border-radius: var(--radius-md); margin: 1.6em 0; width: 100%; height: auto; }
+.prose-ppi table { width: 100%; border-collapse: collapse; margin: 1.4em 0; font-family: var(--font-sans); font-size: 0.9375rem; }
+.prose-ppi td, .prose-ppi th { border: 1px solid var(--color-line); padding: 0.55rem 0.7rem; text-align: left; }
+
+/* Scroll reveal: content is visible unless JS arms it, so nothing is lost without scripting */
+.reveal { transition: opacity 0.65s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.reveal[data-armed]:not([data-in]) { opacity: 0; transform: translateY(14px); }
+
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slide-r { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes pop-in { from { opacity: 0; transform: translate(-50%, -48%) scale(0.98); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+@keyframes acc-down { from { height: 0; } to { height: var(--radix-accordion-content-height); } }
+@keyframes acc-up { from { height: var(--radix-accordion-content-height); } to { height: 0; } }
+
+/* Blueprint grid on dark bands, and a soft two-tone glow behind the hero */
+.blueprint { background-image: linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px); background-size: 48px 48px; }
+.hero-glow { background-image: radial-gradient(60rem 28rem at 6% -8%, rgb(39 68 234 / 0.10), transparent 62%), radial-gradient(44rem 26rem at 98% 6%, rgb(25 211 178 / 0.13), transparent 62%); }
+
+/* Dark theme. <html data-theme> is set before first paint by an inline script: system preference unless the visitor chose. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+html { color-scheme: light; }
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --color-paper: #0a0f1e;
+  --color-card: #111830;
+  --color-ink: #eef2ff;
+  --color-ink-2: #c0cae4;
+  --color-muted: #8f9cbd;
+  --color-line: #1f2a48;
+  --color-line-2: #2e3c60;
+  --color-wash: #18213d;
+  --color-tint: #141d45;
+  --color-brand: #6b84ff;
+  --color-brand-2: #8fa2ff;
+  --color-night: #060a17;
+  --color-accent: #2ee6c5;
+  --color-accent-ink: #34e0c2;
+  --color-ok: #3dd9a0;
+  --color-warn: #f5a524;
+  --color-err: #ff7a70;
+  --shadow-pop: 0 18px 50px -18px rgb(0 0 0 / 0.7);
+}
+/* Dark bands and accent chips keep the light-theme palette inside them, so their text and buttons need no dark variants */
+html[data-theme="dark"] .bg-night { --color-paper: #f4f7fc; --color-brand: #2744ea; --color-brand-2: #1b30c4; }
+html[data-theme="dark"] .bg-accent { --color-ink: #0a1128; }
+html[data-theme="dark"] .hero-glow { background-image: radial-gradient(60rem 28rem at 6% -8%, rgb(107 132 255 / 0.14), transparent 62%), radial-gradient(44rem 26rem at 98% 6%, rgb(46 230 197 / 0.09), transparent 62%); }
